@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Detail View</title>
+</head>
+<body>
+    <h1>Training Page - Quiz Page </h1>
+    <a href="{% url 'quizzes-all-quizzes' %}"><p>Go back to all Trainings</p></a>
+    <hr>
+    <h1> {{quiz.Name}} </h1>
+    <h3> {{ quiz.q1Question }} </h3>
+    <p> {{ quiz.q1Answer }}</p>
+    <br>
+    <h3> {{ quiz.q2Question }} </h3>
+    <p> {{ quiz.q2Answer }}</p>
+    
+
+    <script>
+        // Creating a Quiz class
+        class Question{
+    	    constructor(questionQuestion, questionAnswer){
+                this.questionQuestion = questionQuestion;
+                this.questionAnswer = questionAnswer;
+            }
+    
+            getQuestionQuestion(){
+                return this.questionQuestion;
+            }
+        
+            getQuestionAnswer(){
+                return this.questionAnswer;
+            }
+        }
+        var questionArray = [];
+        let question1 = new Question("{{quiz.q1Question}}", "{{quiz.q1Answer}}");
+        let question2 = new Question("{{ quiz.q2Question}}", "{{quiz.q2Answer}}");
+        questionArray.push(question1);
+        questionArray.push(question2);
+        {% comment %} let questionQuestion = {{ quiz.q3Question}} {% endcomment %}
+        {% comment %} let questionAnswer = {{ quiz.q3Answer}}
+        let questionQuestion = {{ quiz.q4Question}}
+        let questionAnswer = {{ quiz.q4Answer}}
+        let questionQuestion = {{ quiz.q5Question}}
+        let questionAnswer = {{ quiz.q5Answer}} {% endcomment %}
+        
+        console.log(questionArray);
+    </script>
+
+</body>
+</html>
