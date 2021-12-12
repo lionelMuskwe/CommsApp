@@ -1,26 +1,55 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <style>
         body {
+            background-image: url({% static 'CommsProject/images/background.jpg' %});
             padding: 20px;
         }
+        
+        img {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+            filter: blur(5px);
+            }
         .contentContainer {
             margin-top: 10%;
+            background-color: rgb(179, 174, 179,0.8);
+            border-radius: 10px;
+            box-shadow: rgb(221, 219, 219) 10px 10px 10px 20px
         }
 
         .question {
             font-size: 35px;
+            padding: 20px,;
         }
 
         .answer {
             margin-top: 5%;
             width: 40%;
+            border: 0px;
+            border-radius: 15px;
+            padding: 10px;
         }
 
         .checkAnswer{
             margin-top: 2%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
         }
+
+        .go-back {
+            font-size: 20px;
+            color: #ffffff;
+        }
+
 
     </style>
     <meta charset="UTF-8">
@@ -34,16 +63,16 @@
 
 <body>
     <h1>Training Page - Quiz Page </h1>
-    <a href="{% url 'quizzes-all-quizzes' %}"><p>Go back to all Trainings</p></a>
+    <a class="go-back" href="{% url 'quizzes-all-quizzes' %}"><p>Go back to all Trainings</p></a>
     <hr>
-    <h2> Training topic: {{quiz.name}} </h2>
+    <h2> Topic: <u>{{quiz.name}}</u> </h2>
 
     <div class="contentContainer container w-75">
         <div class="questionContainer">
             <div class="question">
             </div>
-            <div class="w-50 container">
-                <input class="answer w-100 container" type="text" placeholder="Enter Answer here">
+            <div class="w-50 ">
+                <input class="answer w-100 " type="text" placeholder="Enter Answer here">
             </div>
             <div class="checkAnswer w-50 container">
                 <button class="checkAnswer" id="checkAnswerButton">Check Answer</button>

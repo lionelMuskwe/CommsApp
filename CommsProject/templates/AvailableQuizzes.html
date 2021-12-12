@@ -1,3 +1,4 @@
+{% load static  %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,15 +6,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Trainings</title>
+    <style>
+        body {
+            background-image: url({% static 'CommsProject/images/background.jpg' %});
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .training {
+            font-size: 50px;
+            color: rgb(0, 0, 0);
+            width: 35%;
+            height: fit-content;
+            padding:20px;
+
+            margin-bottom:5px;
+            border-radius: 15px;
+            background-color: rgba(240, 240, 240, 0.3)
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover{
+            text-shadow: #f3f1f1 3px 3px;
+        }
+
+
+
+    </style>
 </head>
 <body>
     <h1> Available Trainings </h1>
     <hr>
     <ul>
         {% for quiz in quizzes %}
-            <a href="{% url 'quiz-detail' quiz.pk %}">{{quiz.name}}</a>
-            <br>
-            <br>
+            <a href="{% url 'quiz-detail' quiz.pk %}">
+                <div class="training">
+                    {{quiz.name}}
+                </div> 
+            </a>
             
         {% empty %}
             <li> No objects yet </li>
