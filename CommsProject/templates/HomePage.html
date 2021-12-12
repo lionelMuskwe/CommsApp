@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- Adding fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url({% static 'CommsProject/images/background.jpg' %});
+            margin: 0;
+            padding: 0% 15% 0% 15%;
+        }
+        .contentContainer {
+            margin: auto;
+            width: 60%;
+            margin-left: 50%;
+            /* padding: 2% 20% 0px 20%; */
+            padding-top: 5%;
+        }
+
+        .title {
+            font-size: 80px;
+        }
+
+        .catchphrase {
+            font-size: 25px;
+            font-family: 'Varela Round', sans-serif;
+            color: rgb(17, 16, 16)
+        }
+
+        img {
+            width :200px;
+            height:200px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div class="contentContainer">
+        <h1 class="title">Welcome to Communicare</h1>
+        {% comment %} <img src="{% static 'CommsProject/images/background.jpg' %}"> {% endcomment %}
+    
+        <div class="catchphrase">
+            <br>
+            Striving to bridge the ever expanding communication chasm
+        </div>
+
+        <div class="companyAims">
+            <br>
+            <h3>Our aims</h3>
+            <p> We aspire to provide businesses and personal individuals with the necessary platform to grow they communication skills via learning and testing</p>
+        </div>
+    </div>
+</body>
+</html>

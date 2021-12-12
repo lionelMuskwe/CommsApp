@@ -26,4 +26,7 @@ class ShowQuizDetailView(DetailView):
         return super().get_context_data(*args, **kwargs)
     
     print("This bit of code ran")
+
+class HomePageView(TemplateView):
+    template_name = "HomePage.html"
     

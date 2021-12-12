@@ -1,25 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        body {
+            padding: 20px;
+        }
+        .contentContainer {
+            margin-top: 10%;
+        }
+
+        .question {
+            font-size: 35px;
+        }
+
+        .answer {
+            margin-top: 5%;
+            width: 40%;
+        }
+
+        .checkAnswer{
+            margin-top: 2%;
+        }
+
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Training Detail View</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
+
+
 <body>
     <h1>Training Page - Quiz Page </h1>
     <a href="{% url 'quizzes-all-quizzes' %}"><p>Go back to all Trainings</p></a>
     <hr>
-    <h1> {{quiz.Name}} </h1>
-    <h3> {{ quiz.q1Question }} </h3>
-    <p> {{ quiz.q1Answer }}</p>
-    <br>
-    <h3> {{ quiz.q2Question }} </h3>
-    <p> {{ quiz.q2Answer }}</p>
-    
+    <h2> Training topic: {{quiz.name}} </h2>
+
+    <div class="contentContainer container w-75">
+        <div class="questionContainer">
+            <div class="question">
+            </div>
+            <div class="w-50 container">
+                <input class="answer w-100 container" type="text" placeholder="Enter Answer here">
+            </div>
+            <div class="checkAnswer w-50 container">
+                <button class="checkAnswer" id="checkAnswerButton">Check Answer</button>
+            </div>
+        </div>
+
+    </div>
 
     <script>
+        var quizName = '{{quiz.Name}}';
         // Creating a Quiz class
+        var questionArray = [];
         class Question{
     	    constructor(questionQuestion, questionAnswer){
                 this.questionQuestion = questionQuestion;
@@ -34,19 +70,46 @@
                 return this.questionAnswer;
             }
         }
-        var questionArray = [];
         let question1 = new Question("{{quiz.q1Question}}", "{{quiz.q1Answer}}");
         let question2 = new Question("{{ quiz.q2Question}}", "{{quiz.q2Answer}}");
         questionArray.push(question1);
         questionArray.push(question2);
-        {% comment %} let questionQuestion = {{ quiz.q3Question}} {% endcomment %}
-        {% comment %} let questionAnswer = {{ quiz.q3Answer}}
-        let questionQuestion = {{ quiz.q4Question}}
-        let questionAnswer = {{ quiz.q4Answer}}
-        let questionQuestion = {{ quiz.q5Question}}
-        let questionAnswer = {{ quiz.q5Answer}} {% endcomment %}
         
-        console.log(questionArray);
+        //  Creating quiz page layout here
+        // ---------------------------------------------
+        
+        var questionIndex = 0;
+
+        $("#checkAnswerButton").click(function(){
+            // alert($(".answer").val());
+            // alert(questionArray[questionIndex].getQuestionAnswer());
+            console.log($(".answer").val());
+            console.log(questionArray[questionIndex].getQuestionAnswer());
+
+            if ($(".answer").val() === (questionArray[questionIndex].getQuestionAnswer())){
+                if (questionIndex < questionArray.length-1){
+                    nexQuestion();
+                } else{
+                    alert("game over");
+                }
+                
+            }
+        })
+
+
+        function asignQuizQuestion(){
+            $(".question").text(questionArray[questionIndex].getQuestionQuestion());
+        }
+
+        function nexQuestion(){
+            questionIndex += 1;
+            asignQuizQuestion()
+        }
+
+
+
+        asignQuizQuestion();
+        // ---------------------------------------------
     </script>
 
 </body>
