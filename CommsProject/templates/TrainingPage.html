@@ -50,6 +50,14 @@
             color: #ffffff;
         }
 
+        .questionExplanation {
+            margin-top: 20px;
+            background-color: rgb(179, 174, 179,0.8);
+            border-radius: 10px;
+            box-shadow: rgb(221, 219, 219) 10px 10px 10px 20px;
+            padding: 15px;
+        }
+
 
     </style>
     <meta charset="UTF-8">
@@ -78,7 +86,9 @@
                 <button class="checkAnswer" id="checkAnswerButton">Check Answer</button>
             </div>
         </div>
-
+        <div class="questionExplanation">
+            
+        </div>
     </div>
 
     <script>
@@ -86,9 +96,10 @@
         // Creating a Quiz class
         var questionArray = [];
         class Question{
-    	    constructor(questionQuestion, questionAnswer){
+    	    constructor(questionQuestion, questionAnswer, questionExplanation){
                 this.questionQuestion = questionQuestion;
                 this.questionAnswer = questionAnswer;
+                this.questionExplanation = questionExplanation;
             }
     
             getQuestionQuestion(){
@@ -98,11 +109,17 @@
             getQuestionAnswer(){
                 return this.questionAnswer;
             }
+
+            getQuestionExplanation(){
+                return this.questionExplanation;
+            }
         }
-        let question1 = new Question("{{quiz.q1Question}}", "{{quiz.q1Answer}}");
-        let question2 = new Question("{{ quiz.q2Question}}", "{{quiz.q2Answer}}");
+        let question1 = new Question("{{quiz.q1Question}}", "{{quiz.q1Answer}}", "{{quiz.q1Explanation}}");
+        let question2 = new Question("{{ quiz.q2Question}}", "{{quiz.q2Answer}}", "{{quiz.q2Explanation}}");
+        let question3 = new Question("{{quiz.q3Question}}", "{{quiz.q3Answer}}", "{{quiz.q3Explanation}}");
         questionArray.push(question1);
         questionArray.push(question2);
+        questionArray.push(question3);
         
         //  Creating quiz page layout here
         // ---------------------------------------------
@@ -117,12 +134,15 @@
 
             if ($(".answer").val() === (questionArray[questionIndex].getQuestionAnswer())){
                 if (questionIndex < questionArray.length-1){
+                    showExplanation()
                     nexQuestion();
                 } else{
                     alert("game over");
-                }
-                
+                } 
+            } else {
+                alert("Wrong answer !")
             }
+            $(".answer").val("");
         })
 
 
@@ -133,6 +153,10 @@
         function nexQuestion(){
             questionIndex += 1;
             asignQuizQuestion()
+        }
+
+        function showExplanation(){
+            $(".questionExplanation").text(questionArray[questionIndex].getQuestionExplanation());
         }
 
 
