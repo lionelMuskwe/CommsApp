@@ -125,6 +125,7 @@
         // ---------------------------------------------
         
         var questionIndex = 0;
+        var questionStillActive = false;
 
         $("#checkAnswerButton").click(function(){
             // alert($(".answer").val());
@@ -135,10 +136,14 @@
             if ($(".answer").val() === (questionArray[questionIndex].getQuestionAnswer())){
                 if (questionIndex < questionArray.length-1){
                     showExplanation()
-                    nexQuestion();
+                    setButtonToNextButton();
                 } else{
-                    alert("game over");
+                    alert("Congratulations: You have completed this training module");
                 } 
+            } else if ($("#checkAnswerButton").text() === "Next Question"){
+                    hideExplanation()
+                    nextQuestion();
+                    $("#checkAnswerButton").text("Check Answer")
             } else {
                 alert("Wrong answer !")
             }
@@ -150,7 +155,11 @@
             $(".question").text(questionArray[questionIndex].getQuestionQuestion());
         }
 
-        function nexQuestion(){
+        function setButtonToNextButton(){
+            $("#checkAnswerButton").text("Next Question");
+        }
+
+        function nextQuestion(){
             questionIndex += 1;
             asignQuizQuestion()
         }
@@ -158,10 +167,15 @@
         function showExplanation(){
             $(".questionExplanation").text(questionArray[questionIndex].getQuestionExplanation());
         }
+        
+        function hideExplanation(){
+            $(".questionExplanation").text("");
+        }
 
 
 
         asignQuizQuestion();
+        
         // ---------------------------------------------
     </script>
 
